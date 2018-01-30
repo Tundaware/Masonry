@@ -55,11 +55,12 @@ static char kInstalledConstraintsKey;
 - (id)initWithFirstViewAttribute:(MASViewAttribute *)firstViewAttribute {
     self = [super init];
     if (!self) return nil;
-    
+
     _firstViewAttribute = firstViewAttribute;
     self.layoutPriority = MASLayoutPriorityRequired;
     self.layoutMultiplier = 1;
-    
+    self.active = true;
+
     return self;
 }
 
@@ -298,10 +299,12 @@ static char kInstalledConstraintsKey;
 #pragma mark - MASConstraint
 
 - (void)activate {
+    self.active = true;
     [self install];
 }
 
 - (void)deactivate {
+    self.active = false;
     [self uninstall];
 }
 
@@ -311,11 +314,14 @@ static char kInstalledConstraintsKey;
     }
     
     if ([self supportsActiveProperty] && self.layoutConstraint) {
-        self.layoutConstraint.active = YES;
+        self.layoutConstraint.active = self.active;
         [self.firstViewAttribute.view.mas_installedConstraints addObject:self];
         return;
     }
-    
+
+    if (self.active) {
+      return;
+    }
     MAS_VIEW *firstLayoutItem = self.firstViewAttribute.item;
     NSLayoutAttribute firstLayoutAttribute = self.firstViewAttribute.layoutAttribute;
     MAS_VIEW *secondLayoutItem = self.secondViewAttribute.item;

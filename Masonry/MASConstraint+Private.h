@@ -19,6 +19,11 @@
 @property (nonatomic, assign) BOOL updateExisting;
 
 /**
+ *  Whether or not the constraint is active
+ */
+@property (nonatomic, assign) BOOL active;
+
+/**
  *	Usually MASConstraintMaker but could be a parent MASConstraint
  */
 @property (nonatomic, weak) id<MASConstraintDelegate> delegate;
