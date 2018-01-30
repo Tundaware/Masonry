@@ -319,7 +319,7 @@ static char kInstalledConstraintsKey;
         return;
     }
 
-    if (self.active) {
+    if (!self.active) {
       return;
     }
     MAS_VIEW *firstLayoutItem = self.firstViewAttribute.item;
