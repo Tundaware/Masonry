@@ -258,4 +258,10 @@
     };
 }
 
+#pragma mark - convenience
+
+- (MAS_VIEW *)superview {
+    return self.view.superview;
+}
+
 @end

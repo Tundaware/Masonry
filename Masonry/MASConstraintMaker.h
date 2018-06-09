@@ -118,6 +118,11 @@ typedef NS_OPTIONS(NSInteger, MASAttribute) {
 @property (nonatomic, assign) BOOL removeExisting;
 
 /**
+ *  Weak reference to the target view's superview
+ */
+@property (nonatomic, weak, readonly) MAS_VIEW *superview;
+
+/**
  *	initialises the maker with a default view
  *
  *	@param	view	any MASConstraint are created with this view as the first item
